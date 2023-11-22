@@ -38,6 +38,26 @@ async function getNewsByCategory(event) {
   render(); // 넣어주고 나서 함수 호출!
 }
 
+
+async function getNewsByKeyword() {
+    const keyword = document.getElementById("keyword-input").value;
+    console.log("keyword", keyword);
+
+    const url = new URL(
+        `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
+    );
+
+    const response = await fetch(url); // API 엔드포인트로 HTTP 요청을 보내고 응답을 기다림
+    const data = await response.json(); // 2. HTTP 응답에서 JSON 데이터를 추출하고, 다시 기다림.
+    console.log("keyword_data_", data);
+    
+
+    //담아서
+    newsList = data.articles;
+    render(); // UI 보여주도록 랜더링
+  
+}
+
 // 뉴스 정보 가져오기
 const render = () => {
   // const는 재할당이 안 되므로 바로 그냥 값을 줘버린다.
