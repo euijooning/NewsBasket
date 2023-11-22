@@ -19,22 +19,25 @@ async function getLatestNews() {
 // 뉴스 정보 가져오기
 const render = () => {
     // const는 재할당이 안 되므로 바로 그냥 값을 줘버린다.
-  const newsHTML = newsList.map(
-    (news) => `<div class="row news">
-    <div class="col-lg-4"> 
-        <img class="news-img" src=${news.urlToImage}>
-    </div>
-    <div class="col-lg-8">
-        <h2>${news.title}</h2>
-        <p>
-            ${news.description}
-        </p>
-        <div>
-            ${news.source.name} * ${news.publishedAt}
+    const newsHTML = newsList.map((news) => {
+      // 날짜 포맷팅 함수
+      const formattedDate = new Date(news.publishedAt).toLocaleString();
+  
+      return `<div class="row news">
+        <div class="col-lg-4"> 
+            <img class="news-img" src=${news.urlToImage}>
         </div>
-    </div>
-</div>`
-  ).join('');
+        <div class="col-lg-8">
+            <h2>${news.title}</h2>
+            <p>
+                ${news.description}
+            </p>
+            <div>
+                ${news.source.name} * ${formattedDate}
+            </div>
+        </div>
+    </div>`;
+    }).join('');
   document.getElementById("news-posts").innerHTML = newsHTML;
 };
 
