@@ -1,6 +1,10 @@
 const API_KEY = "4e15c1245600477d85258dae3f69da39";
 let newsList = [];
 
+const topics = document.querySelectorAll(".topics button");
+topics.forEach(topic => topic.addEventListener("click", (event) => getNewsByCategory(event)));
+// 이 부분에서는 각각의 버튼에 대해 클릭 이벤트를 추가하고, 클릭되면 getNewsByCategory 함수를 호출한다.
+
 async function getLatestNews() {
   // url 설정
   let url = new URL(
@@ -15,6 +19,11 @@ async function getLatestNews() {
   render();
   console.log("info", newsList);
 }
+
+
+async function getNewsByCategory(event) {
+    console.log("category");
+  }
 
 // 뉴스 정보 가져오기
 const render = () => {
