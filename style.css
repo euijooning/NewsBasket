@@ -22,9 +22,17 @@ body {
 .topics button:hover {
     background-color: #dee2e6;
 }
+
+.news .col-lg-6 {
+    width: 100%; /* 부모 요소의 100%로 너비 설정 */
+    max-width: 250px; /* 최대 너비를 원하는 크기로 설정 */
+    overflow: hidden; /* 초과 부분을 숨깁니다 */
+}
+
 .news-img {
-    max-width: 100%;
-    max-height: 250px;
+    width: 100%; /* 이미지의 너비를 100%로 설정하여 부모 요소에 맞춥니다 */
+    height: auto; /* 높이는 자동으로 조정하여 비율을 유지합니다 */
+    object-fit: cover; /* 이미지를 부모 요소에 맞게 크롭합니다 */
 }
 .news {
     border-bottom: 1px solid black;
