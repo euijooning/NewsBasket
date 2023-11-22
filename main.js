@@ -32,6 +32,10 @@ async function getNewsByCategory(event) {
   const response = await fetch(url); // API 엔드포인트로 HTTP 요청을 보내고 응답을 기다림
   const data = await response.json(); // 2. HTTP 응답에서 JSON 데이터를 추출하고, 다시 기다림.
   console.log("data_", data);
+
+  // 카테고리별 가져온 뉴스를 보여주기!
+  newsList = data.articles; // 뉴스리스트에 방금 받은 데이터를 넣어줘야 하므로
+  render(); // 넣어주고 나서 함수 호출!
 }
 
 // 뉴스 정보 가져오기
