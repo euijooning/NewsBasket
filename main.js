@@ -31,7 +31,7 @@ async function getNewsByCategory(event) {
 
 async function getNewsByKeyword() {
   const keyword = document.getElementById("keyword-input").value;
-  
+
   url = new URL(
     `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
   );
