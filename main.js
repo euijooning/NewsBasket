@@ -7,56 +7,51 @@ topics.forEach((topic) =>
 );
 // 이 부분에서는 각각의 버튼에 대해 클릭 이벤트를 추가하고, 클릭되면 getNewsByCategory 함수를 호출한다.
 
+// URL도 전역변수로 빼버리기
+let url = new URL(
+  `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
+);
+
 async function getLatestNews() {
   // url 설정
-  let url = new URL(
+  url = new URL(
     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
   );
-
-  const response = await fetch(url); // 이 url 주소로부터 데이터 가져오기
-  const data = await response.json(); // json 형태로 추출
-
-  newsList = data.articles; // 값 확정
-  // 여기서 render()를 불러야 한다.
-  render();
-  console.log("info", newsList);
+  getNews();
 }
 
 async function getNewsByCategory(event) {
-    const category = event.target.textContent.toLowerCase();
-  console.log("category", category);
+  const category = event.target.textContent.toLowerCase();
 
-  const url = new URL(
+  url = new URL(
     `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
   );
-  const response = await fetch(url); // API 엔드포인트로 HTTP 요청을 보내고 응답을 기다림
-  const data = await response.json(); // 2. HTTP 응답에서 JSON 데이터를 추출하고, 다시 기다림.
-  console.log("data_", data);
-
-  // 카테고리별 가져온 뉴스를 보여주기!
-  newsList = data.articles; // 뉴스리스트에 방금 받은 데이터를 넣어줘야 하므로
-  render(); // 넣어주고 나서 함수 호출!
+  getNews();
 }
-
 
 async function getNewsByKeyword() {
-    const keyword = document.getElementById("keyword-input").value;
-    console.log("keyword", keyword);
-
-    const url = new URL(
-        `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
-    );
-
-    const response = await fetch(url); // API 엔드포인트로 HTTP 요청을 보내고 응답을 기다림
-    const data = await response.json(); // 2. HTTP 응답에서 JSON 데이터를 추출하고, 다시 기다림.
-    console.log("keyword_data_", data);
-    
-
-    //담아서
-    newsList = data.articles;
-    render(); // UI 보여주도록 랜더링
+  const keyword = document.getElementById("keyword-input").value;
   
+  url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
+  );
+  getNews();
 }
+
+
+
+// 겹치는 부분 함수로 묶어서 refactor
+const getNews = async () => {
+  const response = await fetch(url); // 이 url 주소로부터 데이터 가져오기
+  const data = await response.json(); // json 형태로 추출
+  console.log("data_", data);
+  newsList = data.articles; // 값 확정
+
+  // 여기서 render()를 불러야 한다.
+  render();
+  console.log("info", newsList);
+};
+
 
 // 뉴스 정보 가져오기
 const render = () => {
