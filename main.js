@@ -42,14 +42,37 @@ async function getNewsByKeyword() {
 
 // 겹치는 부분 함수로 묶어서 refactor
 const getNews = async () => {
-  const response = await fetch(url); // 이 url 주소로부터 데이터 가져오기
-  const data = await response.json(); // json 형태로 추출
-  console.log("data_", data);
-  newsList = data.articles; // 값 확정
 
-  // 여기서 render()를 불러야 한다.
-  render();
-  console.log("info", newsList);
+  try {
+    const response = await fetch(url); 
+    const data = await response.json();
+    if(response.status === 200) {
+      newsList = data.articles; 
+      render();
+    } else {
+      throw new Error(data.message);
+    }   
+  } catch(error) {
+    // console.log("error", error.message);
+    errorRender(error.message);
+  }
+  // const response = await fetch(url); // 이 url 주소로부터 데이터 가져오기
+  // const data = await response.json(); // json 형태로 추출
+  // console.log("data_", data);
+  // newsList = data.articles; // 값 확정
+
+  // // 여기서 render()를 불러야 한다.
+  // render();
+  // console.log("info", newsList);
+};
+
+
+// 유저에게 에러 메시지 출력해주는 함수
+const errorRender = (errorMessage) => {
+  const errorHTML = `<div class="alert alert-dark" role="alert">
+  ${errorMessage}
+</div>`;
+  document.getElementById("news-posts").innerHTML = errorHTML;
 };
 
 
