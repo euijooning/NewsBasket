@@ -56,14 +56,6 @@ const getNews = async () => {
     // console.log("error", error.message);
     errorRender(error.message);
   }
-  // const response = await fetch(url); // 이 url 주소로부터 데이터 가져오기
-  // const data = await response.json(); // json 형태로 추출
-  // console.log("data_", data);
-  // newsList = data.articles; // 값 확정
-
-  // // 여기서 render()를 불러야 한다.
-  // render();
-  // console.log("info", newsList);
 };
 
 
