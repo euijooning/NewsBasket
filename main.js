@@ -7,18 +7,24 @@ topics.forEach((topic) =>
 );
 // 이 부분에서는 각각의 버튼에 대해 클릭 이벤트를 추가하고, 클릭되면 getNewsByCategory 함수를 호출한다.
 
+
 // URL도 전역변수로 빼버리기
 let url = new URL(
   `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
 );
+
+
 
 async function getLatestNews() {
   // url 설정
   url = new URL(
     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
   );
+
   getNews();
 }
+
+
 
 async function getNewsByCategory(event) {
   const category = event.target.textContent.toLowerCase();
@@ -26,8 +32,11 @@ async function getNewsByCategory(event) {
   url = new URL(
     `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
   );
+
   getNews();
 }
+
+
 
 async function getNewsByKeyword() {
   const keyword = document.getElementById("keyword-input").value;
@@ -35,26 +44,28 @@ async function getNewsByKeyword() {
   url = new URL(
     `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
   );
+
   getNews();
 }
 
 
-
 // 겹치는 부분 함수로 묶어서 refactor
 const getNews = async () => {
-
   try {
     const response = await fetch(url); 
     const data = await response.json();
+
     if(response.status === 200) {
       if(data.articles.length === 0) { // 검색 결과가 존재하지 않는 경우(기사 0개) 예외처리
         throw new Error("There are no results for this search.")
       }
       newsList = data.articles; 
       render();
-    } else {
+    } 
+    else {
       throw new Error(data.message);
-    }   
+    }
+
   } catch(error) {
     // console.log("error", error.message);
     errorRender(error.message);
@@ -67,6 +78,7 @@ const errorRender = (errorMessage) => {
   const errorHTML = `<div class="alert alert-dark" role="alert">
   ${errorMessage}
 </div>`;
+
   document.getElementById("news-posts").innerHTML = errorHTML;
 };
 
@@ -95,6 +107,7 @@ const render = () => {
     </div>`;
     })
     .join("");
+
   document.getElementById("news-posts").innerHTML = newsHTML;
 };
 
