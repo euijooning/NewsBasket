@@ -6,6 +6,7 @@
 .topics {
     margin-top: 1em;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     border-top: 1px solid black;
     border-bottom: 5px double silver;
@@ -21,4 +22,7 @@
 .article-img {
     max-width: 100%;
     max-height: 250px;
+}
+.articles {
+    border-bottom: 1px solid black;
 }
