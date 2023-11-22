@@ -23,7 +23,7 @@ async function getLatestNews() {
 }
 
 async function getNewsByCategory(event) {
-    const category = event.target.textContent;
+    const category = event.target.textContent.toLowerCase();
   console.log("category", category);
 
   const url = new URL(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`);
