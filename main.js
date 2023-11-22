@@ -2,7 +2,9 @@ const API_KEY = "4e15c1245600477d85258dae3f69da39";
 let newsList = [];
 
 const topics = document.querySelectorAll(".topics button");
-topics.forEach(topic => topic.addEventListener("click", (event) => getNewsByCategory(event)));
+topics.forEach((topic) =>
+  topic.addEventListener("click", (event) => getNewsByCategory(event))
+);
 // 이 부분에서는 각각의 버튼에 대해 클릭 이벤트를 추가하고, 클릭되면 getNewsByCategory 함수를 호출한다.
 
 async function getLatestNews() {
@@ -20,18 +22,21 @@ async function getLatestNews() {
   console.log("info", newsList);
 }
 
-
 async function getNewsByCategory(event) {
-    console.log("category");
-  }
+    const category = event.target.textContent;
+  console.log("category", category);
+
+  const url = new URL(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`);
+}
 
 // 뉴스 정보 가져오기
 const render = () => {
-    // const는 재할당이 안 되므로 바로 그냥 값을 줘버린다.
-    const newsHTML = newsList.map((news) => {
+  // const는 재할당이 안 되므로 바로 그냥 값을 줘버린다.
+  const newsHTML = newsList
+    .map((news) => {
       // 날짜 포맷팅 함수
       const formattedDate = new Date(news.publishedAt).toLocaleString();
-  
+
       return `<div class="row news">
         <div class="col-lg-4"> 
             <img class="news-img" src=${news.urlToImage}>
@@ -46,7 +51,8 @@ const render = () => {
             </div>
         </div>
     </div>`;
-    }).join('');
+    })
+    .join("");
   document.getElementById("news-posts").innerHTML = newsHTML;
 };
 
