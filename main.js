@@ -47,6 +47,9 @@ const getNews = async () => {
     const response = await fetch(url); 
     const data = await response.json();
     if(response.status === 200) {
+      if(data.articles.length === 0) { // 검색 결과가 존재하지 않는 경우(기사 0개) 예외처리
+        throw new Error("There are no results for this search.")
+      }
       newsList = data.articles; 
       render();
     } else {
