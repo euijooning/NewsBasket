@@ -1,0 +1,20 @@
+.logo {
+    margin-top: 0.5em;
+    display: flex;
+    justify-content: center;
+}
+.topics {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid black;
+    border-bottom: 5px double silver;
+}
+.topics button {
+    border: none;
+    background: none;
+    margin: 5px;
+}
+.topics button:hover {
+    background-color: #dee2e6;
+}
