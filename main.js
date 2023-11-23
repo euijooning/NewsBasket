@@ -16,6 +16,8 @@ let page = 1;
 const pageSize = 10;
 const groupSize = 5; // 이 두개는 불변해야 하는 값.
 
+
+
 async function getLatestNews() {
   // url 설정
   url = new URL(
@@ -23,6 +25,7 @@ async function getLatestNews() {
   );
   getNews();
 }
+
 
 async function getNewsByCategory(event) {
   const category = event.target.textContent.toLowerCase();
@@ -32,6 +35,7 @@ async function getNewsByCategory(event) {
   getNews();
 }
 
+
 async function getNewsByKeyword() {
   const keyword = document.getElementById("keyword-input").value;
   url = new URL(
@@ -40,9 +44,14 @@ async function getNewsByKeyword() {
   getNews();
 }
 
+
 // 겹치는 부분 함수로 묶어서 refactor
 const getNews = async () => {
   try {
+    // 일일이 pageNumber 넣기 귀찮으니까 url 호출 전에 파라미터로 붙여서 세팅해버리기
+    url.searchParams.set("page", page); // 형태 : &page=page
+    url.searchParams.set("pageSize", pageSize); // &pageSize=pageSize
+    
     const response = await fetch(url);
     const data = await response.json();
 
@@ -59,10 +68,11 @@ const getNews = async () => {
       throw new Error(data.message);
     }
   } catch (error) {
-    // console.log("error", error.message);
     errorRender(error.message);
   }
 };
+
+
 
 // 유저에게 에러 메시지 출력해주는 함수
 const errorRender = (errorMessage) => {
@@ -72,13 +82,10 @@ const errorRender = (errorMessage) => {
   document.getElementById("news-posts").innerHTML = errorHTML;
 };
 
+
+
 // 페이지네이션 함수
 const paginationRender = () => {
-  // totalResults
-  // page
-  // pageSize
-  // groupSize
-  // totalPages
 
   // pageGroup
   const pageGroup = Math.ceil(page / groupSize);
@@ -89,11 +96,13 @@ const paginationRender = () => {
 
   let paginationHTML = ``;
   for (let i = firstPage; i <= lastPage; i++) {
-    paginationHTML += `<li class="page-item"><a class="page-link" href="#">${i}</a></li>`;
+    paginationHTML += `<li class="page-item" onclick="navigateToPage(${i})"><a class="page-link">${i}</a></li>`;
   }
 
   document.querySelector(".pagination").innerHTML = paginationHTML;
 };
+
+
 
 // 뉴스 정보 가져오기
 const render = () => {
@@ -121,6 +130,14 @@ const render = () => {
     .join("");
 
   document.getElementById("news-posts").innerHTML = newsHTML;
+};
+
+
+// 페이지 이동 함수
+const navigateToPage = (pageNumber) => {
+  // 다시 뉴스를 가져와야함.
+  page = pageNumber; // 페이지 번호 재세팅
+  getNews();
 };
 
 getLatestNews(); // 함수 실행
