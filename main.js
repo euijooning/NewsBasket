@@ -103,10 +103,12 @@ const paginationRender = () => {
   // 여기도 혹여 음수나올 수 있으므로 추가로 처리해준다.
   const firstPage = lastPage-(groupSize-1) < 0? 1: lastPage-(groupSize-1);
 
-  let paginationHTML = ``;
+  let paginationHTML = `<li class="page-item" onclick ="navigateToPage(${page-1})"><a class="page-link" href="#">Previous</a></li>`;
   for (let i = firstPage; i <= lastPage; i++) {
     paginationHTML += `<li class="page-item ${i===page ? "active" : ""}" onclick="navigateToPage(${i})"><a class="page-link">${i}</a></li>`;
   }
+
+  paginationHTML += `<li class="page-item" onclick ="navigateToPage(${page+1})"><a class="page-link" href="#">Next</a></li>`;
 
   document.querySelector(".pagination").innerHTML = paginationHTML;
 };
