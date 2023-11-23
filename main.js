@@ -91,12 +91,21 @@ const paginationRender = () => {
   const pageGroup = Math.ceil(page / groupSize);
   // lastPage
   const lastPage = pageGroup * groupSize;
+
+  // totalPage 도 정의
+  const totalPages = Math.ceil(totalResults / pageSize)
+  // (추가) 만약 마지막 pageGroup이 groupSize보다 작다? 이 때는 lastPage = totalPages 가 되게 해야.
+  if(lastPage > totalPages) {
+    lastPage = totalPages
+  }
+
   // firstPage
-  const firstPage = lastPage - (groupSize - 1);
+  // 여기도 혹여 음수나올 수 있으므로 추가로 처리해준다.
+  const firstPage = lastPage-(groupSize-1) < 0? 1: lastPage-(groupSize-1);
 
   let paginationHTML = ``;
   for (let i = firstPage; i <= lastPage; i++) {
-    paginationHTML += `<li class="page-item" onclick="navigateToPage(${i})"><a class="page-link">${i}</a></li>`;
+    paginationHTML += `<li class="page-item ${i===page ? "active" : ""}" onclick="navigateToPage(${i})"><a class="page-link">${i}</a></li>`;
   }
 
   document.querySelector(".pagination").innerHTML = paginationHTML;
