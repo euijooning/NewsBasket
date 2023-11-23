@@ -90,7 +90,7 @@ const paginationRender = () => {
   // pageGroup
   const pageGroup = Math.ceil(page / groupSize);
   // lastPage
-  const lastPage = pageGroup * groupSize;
+  let lastPage = pageGroup * groupSize;
 
   // totalPage 도 정의
   const totalPages = Math.ceil(totalResults / pageSize)
