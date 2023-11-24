@@ -22,11 +22,23 @@
 
 <br>
 
-## 🚀 화면 이미지
+## 🚀 기술 스택
+<div>
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
 
 <br>
+<br>
 
-## 🚀 시연 영상
+## 🚀 시연 영상(이미지를 클릭하세요)
+<!-- 이미지를 좌측으로 정렬하고 링크 추가 -->
+<p align="left">
+  <a href="https://www.youtube.com/watch?v=XlHcm3SYMUY">
+    <img src="https://github.com/euijooning/NewsBasket/assets/49093239/a1dc823d-8200-45e6-878b-eef42463ec0f" width=150px, height=100px alt="이미지">
+  </a>
+</p>
 
 <br>
 
