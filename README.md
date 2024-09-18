@@ -35,7 +35,7 @@
 ## 🚀 시연 영상(이미지를 클릭하세요)
 <!-- 이미지를 좌측으로 정렬하고 링크 추가 -->
 <p align="left">
-  <a href="https://www.youtube.com/watch?v=XKoXnyKgBl4">
+  <a href=" https://youtu.be/vwq5-Lt0w0c">
     <img src="https://github.com/euijooning/NewsBasket/assets/49093239/a1dc823d-8200-45e6-878b-eef42463ec0f" width=150px, height=100px alt="이미지">
   </a>
 </p>
